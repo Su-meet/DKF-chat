@@ -13,19 +13,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on('join', (chatRoomId) => {
-        console.log('joined chatrom ' + chatRoomId)
+        console.log('joined chatroom ' + chatRoomId)
         socket.join(chatRoomId)
     })
 
     socket.on('sendMessage', (message) => {
-        // console.log(message)
-
-        // ----------Bad Words----------
-        // const filter = new Filter()
-        // if (filter.isProfane(message.text)) {
-        //   return 'Profanity is not allowed'
-        // }
-
         io.to(message.chatRoom).emit('message', {
             msg: message.text,
             user: message.userId,
